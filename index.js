@@ -1,3 +1,4 @@
+
 const redux = require('redux')
 const CreateStore= redux.legacy_createStore;
 const BUY_CAKE ='BUY_CAKE'
@@ -15,19 +16,46 @@ function buyIceCream(){
 }
 //(previousState,Action) => newState
 // we already have the action defined, so let's define what our state looks like
-const initialState={
-    numOfCakes:8,
+//old state
+// const initialState={
+//     numOfCakes:8,
+//     numOfIceCreams:20
+// }
+const initialCakeState={
+    numOfCakes:8
+}
+const initialIceCreamState={
     numOfIceCreams:20
 }
 // console.log(initialState);
-
-const reducer=(state= initialState, action)=>{
+// old reducer
+// const reducer=(state= initialState, action)=>{
+//     switch(action.type){ 
+//         case BUY_CAKE:
+//              return {
+//                 ...state,
+//                 numOfCakes: state.numOfCakes-1
+//             }
+//         case BUY_ICECREAM:
+//             return {
+//                 ...state,
+//                 numOfIceCreams: state.numOfIceCreams-1
+//             }
+//             default: return state;
+//     }
+// }
+const cakeReducer=(state= initialCakeState, action)=>{
     switch(action.type){ 
         case BUY_CAKE:
              return {
                 ...state,
                 numOfCakes: state.numOfCakes-1
             }
+            default: return state;
+    }
+}
+const iceCreamReducer=(state= initialIceCreamState, action)=>{
+    switch(action.type){ 
         case BUY_ICECREAM:
             return {
                 ...state,
@@ -56,3 +84,8 @@ store.dispatch(buyIceCream());
 store.dispatch(buyIceCream());
 //responsibilty 5 Handles unregestering of listeners by the function which is returned by subscribe(listener)
 unsubscribe();
+
+
+
+
+// console.log("index");
