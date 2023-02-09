@@ -1,6 +1,8 @@
 
 const redux = require('redux')
 const CreateStore= redux.legacy_createStore;
+const combineReducers= redux.combineReducers;
+
 const BUY_CAKE ='BUY_CAKE'
 const BUY_ICECREAM="BUY_ICECREAM"
 function buyCake(){
@@ -65,8 +67,18 @@ const iceCreamReducer=(state= initialIceCreamState, action)=>{
     }
 }
 // console.log(reducer(initialState,buyCake()));
+// before we create a store we combine our reducers, convention is to call combination of all reducer is rootReducer
+const rootReducer= combineReducers({
+    cake: cakeReducer,
+    iceCream: iceCreamReducer
+})
+// so now the store would accept our root reducer
+// but the thing wich is different is the overall wrapped in an object as shown in o/p
+// if we now wish to access num of ice creams we have to do it as
+// state.iceCream.numofIceCreams and similar in cake as the cake/ iceCream are the keys in combine reducer
+// Also we must know that when we dispatch the action both the reducers recieve the action the diff is one of that acts the action another just ignores it.
 //responsibilty 1 done Holds application state by Attaching itself to a reducer
-const store = CreateStore(reducer)
+const store = CreateStore(rootReducer)
 // responsibilty 2 (Allows access to state via getState() )
 console.log("Initial state ", store.getState());
 //responsibility 4 (Registers listeners via subscribe(listener))
@@ -84,8 +96,3 @@ store.dispatch(buyIceCream());
 store.dispatch(buyIceCream());
 //responsibilty 5 Handles unregestering of listeners by the function which is returned by subscribe(listener)
 unsubscribe();
-
-
-
-
-// console.log("index");
