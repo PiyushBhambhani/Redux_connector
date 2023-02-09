@@ -1,10 +1,15 @@
+//Updated code has comment //Middleware chapter
 
-const redux = require('redux')
+const redux = require('redux');
+const reduxLogger = require('redux-logger')
 const CreateStore= redux.legacy_createStore;
 const combineReducers= redux.combineReducers;
-
+//Middleware chapter
+const applyMiddleware= redux.applyMiddleware;
+const logger= reduxLogger.createLogger()
 const BUY_CAKE ='BUY_CAKE'
 const BUY_ICECREAM="BUY_ICECREAM"
+
 function buyCake(){
     return {
         type: BUY_CAKE,
@@ -78,12 +83,14 @@ const rootReducer= combineReducers({
 // state.iceCream.numofIceCreams and similar in cake as the cake/ iceCream are the keys in combine reducer
 // Also we must know that when we dispatch the action both the reducers recieve the action the diff is one of that acts the action another just ignores it.
 //responsibilty 1 done Holds application state by Attaching itself to a reducer
-const store = CreateStore(rootReducer)
+//Middleware chapter
+const store = CreateStore(rootReducer,applyMiddleware(logger))
 // responsibilty 2 (Allows access to state via getState() )
 console.log("Initial state ", store.getState());
 //responsibility 4 (Registers listeners via subscribe(listener))
 const unsubscribe= store.subscribe(()=>{
-    console.log('Updated state is :',store.getState());
+    ////Middleware chapter
+    // console.log('Updated state is :',store.getState());
 })
 //responsibilty 3: Allows state modification via dispatch(ation)
 // store provides a dispacth method to update a state
