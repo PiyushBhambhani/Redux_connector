@@ -1,3 +1,7 @@
+
+// Our Application Fetches a list of users from an API endpoint
+// and stores it in redux store
+
 // we define state action and reducers
 // step 1: was we made initial state and actions
 // step 2: we made our reducer which returns new state which takes a prevstate and action
@@ -6,6 +10,7 @@
 
 const redux= require('redux');
 const CreateStore= redux.CreateStore;
+
 const initialState={
     loading: false,
     users:[],
@@ -76,3 +81,4 @@ const store= CreateStore(reducer);
 // returns() ex unsubscribe(); un registers the listeners
 //store.dispatch to diapatch actions,
 
+// What is left now is to make api calls and dispatch appropriate actions
